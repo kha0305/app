@@ -353,9 +353,11 @@ async def get_my_appointments(current_user: dict = Depends(get_current_user)):
             apt_with_details = AppointmentWithDetails(
                 **apt,
                 patient_name=patient["full_name"],
+                patient_code=patient.get("patient_code", "N/A"),
                 patient_phone=patient["phone"],
                 patient_email=patient["email"],
                 doctor_name=doctor["full_name"],
+                doctor_code=doctor.get("doctor_code", "N/A"),
                 doctor_specialty=doctor_profile["specialty"],
                 doctor_phone=doctor["phone"]
             )
