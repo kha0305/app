@@ -13,7 +13,8 @@ from models import (
     User, UserCreate, UserLogin, Token,
     DoctorProfile, DoctorProfileCreate, DoctorWithUser,
     DoctorSchedule, DoctorScheduleCreate, TimeSlot,
-    Appointment, AppointmentCreate, AppointmentUpdate, AppointmentWithDetails
+    Appointment, AppointmentCreate, AppointmentUpdate, AppointmentWithDetails,
+    SystemStats
 )
 from auth import (
     get_password_hash, verify_password, create_access_token,
