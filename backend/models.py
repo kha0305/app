@@ -48,6 +48,7 @@ class DoctorWithUser(BaseModel):
     id: str
     user_id: str
     full_name: str
+    doctor_code: str
     specialty: str
     experience_years: int
     description: str
@@ -55,6 +56,7 @@ class DoctorWithUser(BaseModel):
     rating: float
     email: str
     phone: str
+    created_at: datetime
 
 # ============= DOCTOR SCHEDULE MODELS =============
 class TimeSlot(BaseModel):
