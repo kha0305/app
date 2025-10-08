@@ -212,6 +212,7 @@ const PatientDashboard = () => {
 const DoctorCard = ({ doctor, onBookSuccess }) => {
   const { API, getAuthHeader } = useAuth();
   const [open, setOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableSlots, setAvailableSlots] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(null);
