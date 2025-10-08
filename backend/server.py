@@ -164,17 +164,20 @@ async def get_doctors(specialty: Optional[str] = None):
     for profile in doctor_profiles:
         user = await db.users.find_one({"id": profile["user_id"]}, {"_id": 0})
         if user:
+            profile = deserialize_datetime(profile)
             doctor_with_user = DoctorWithUser(
                 id=profile["id"],
                 user_id=profile["user_id"],
                 full_name=user["full_name"],
+                doctor_code=user.get("doctor_code", "N/A"),
                 specialty=profile["specialty"],
                 experience_years=profile["experience_years"],
                 description=profile["description"],
                 consultation_fee=profile["consultation_fee"],
                 rating=profile.get("rating", 0.0),
                 email=user["email"],
-                phone=user["phone"]
+                phone=user["phone"],
+                created_at=profile["created_at"]
             )
             result.append(doctor_with_user)
     
