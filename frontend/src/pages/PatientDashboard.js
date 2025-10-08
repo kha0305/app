@@ -158,6 +158,7 @@ const PatientDashboard = () => {
                     <div>
                       <CardTitle className="text-lg">{appointment.doctor_name}</CardTitle>
                       <CardDescription>{appointment.doctor_specialty}</CardDescription>
+                      <Badge variant="outline" className="font-mono text-xs mt-1">{appointment.doctor_code}</Badge>
                     </div>
                     {getStatusBadge(appointment.status)}
                   </div>
