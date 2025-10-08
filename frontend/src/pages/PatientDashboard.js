@@ -398,6 +398,50 @@ const DoctorCard = ({ doctor, onBookSuccess }) => {
             </div>
           </DialogContent>
         </Dialog>
+        
+        <Dialog open={detailsOpen} onOpenChange={setDetailsOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>{doctor.full_name}</DialogTitle>
+              <DialogDescription>{doctor.specialty}</DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label className="text-sm font-medium text-gray-700">Mã bác sĩ</Label>
+                  <p className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">{doctor.doctor_code}</p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-gray-700">Kinh nghiệm</Label>
+                  <p className="text-sm">{doctor.experience_years} năm</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label className="text-sm font-medium text-gray-700">Số điện thoại</Label>
+                  <p className="text-sm">{doctor.phone}</p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium text-gray-700">Email</Label>
+                  <p className="text-sm">{doctor.email}</p>
+                </div>
+              </div>
+              
+              <div>
+                <Label className="text-sm font-medium text-gray-700">Mô tả</Label>
+                <p className="text-sm text-gray-600 leading-relaxed">{doctor.description}</p>
+              </div>
+              
+              <div>
+                <Label className="text-sm font-medium text-gray-700">Phí tư vấn</Label>
+                <p className="text-lg font-semibold text-blue-600">
+                  {doctor.consultation_fee.toLocaleString('vi-VN')} VNĐ
+                </p>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
       </CardFooter>
     </Card>
   );
