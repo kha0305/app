@@ -9,7 +9,7 @@ class UserBase(BaseModel):
     email: EmailStr
     phone: str
     full_name: str
-    role: Literal["patient", "doctor"]
+    role: Literal["patient", "doctor", "admin"]
 
 class UserCreate(UserBase):
     password: str
@@ -17,6 +17,8 @@ class UserCreate(UserBase):
 class User(UserBase):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    patient_code: Optional[str] = None  # Mã số bệnh nhân (BN-XXXXX)
+    doctor_code: Optional[str] = None   # Mã số bác sĩ (BS-XXXXX)
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 class UserLogin(BaseModel):
