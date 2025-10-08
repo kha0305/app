@@ -306,7 +306,7 @@ const DoctorCard = ({ doctor, onBookSuccess }) => {
         </Button>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button className="w-full" data-testid="book-appointment-button">Đặt Lịch Khám</Button>
+            <Button className="flex-1" data-testid="book-appointment-button">Đặt Lịch Khám</Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
