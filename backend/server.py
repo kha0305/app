@@ -63,6 +63,17 @@ def deserialize_datetime(obj):
         return [deserialize_datetime(item) for item in obj]
     return obj
 
+# ============= HELPER FUNCTIONS FOR CODE GENERATION =============
+async def generate_patient_code():
+    """Generate unique patient code: BN-XXXXX"""
+    count = await db.users.count_documents({"role": "patient"})
+    return f"BN-{str(count + 1).zfill(5)}"
+
+async def generate_doctor_code():
+    """Generate unique doctor code: BS-XXXXX"""
+    count = await db.users.count_documents({"role": "doctor"})
+    return f"BS-{str(count + 1).zfill(5)}"
+
 # ============= AUTH ROUTES =============
 @api_router.post("/auth/register", response_model=User)
 async def register(user_data: UserCreate):
@@ -80,6 +91,12 @@ async def register(user_data: UserCreate):
     user_dict = user_data.model_dump()
     password = user_dict.pop("password")
     user = User(**user_dict)
+    
+    # Generate code based on role
+    if user.role == "patient":
+        user.patient_code = await generate_patient_code()
+    elif user.role == "doctor":
+        user.doctor_code = await generate_doctor_code()
     
     # Hash password and store
     user_doc = user.model_dump()
