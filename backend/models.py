@@ -101,8 +101,21 @@ class Appointment(BaseModel):
 
 class AppointmentWithDetails(Appointment):
     patient_name: str
+    patient_code: str
     patient_phone: str
     patient_email: str
     doctor_name: str
+    doctor_code: str
     doctor_specialty: str
     doctor_phone: str
+
+# ============= ADMIN MODELS =============
+class SystemStats(BaseModel):
+    total_users: int
+    total_patients: int
+    total_doctors: int
+    total_appointments: int
+    pending_appointments: int
+    confirmed_appointments: int
+    completed_appointments: int
+    cancelled_appointments: int
