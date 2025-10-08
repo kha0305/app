@@ -275,30 +275,35 @@ const DoctorCard = ({ doctor, onBookSuccess }) => {
   return (
     <Card data-testid="doctor-card">
       <CardHeader>
-        <CardTitle>{doctor.full_name}</CardTitle>
-        <CardDescription>{doctor.specialty}</CardDescription>
+        <div className="flex justify-between items-start">
+          <div>
+            <CardTitle>{doctor.full_name}</CardTitle>
+            <CardDescription>{doctor.specialty}</CardDescription>
+          </div>
+          <Badge variant="outline" className="font-mono">{doctor.doctor_code}</Badge>
+        </div>
       </CardHeader>
       <CardContent className="space-y-2">
         <div className="flex items-center text-sm text-gray-600">
           <User className="h-4 w-4 mr-2" />
           <span>{doctor.experience_years} năm kinh nghiệm</span>
         </div>
-        <div className="flex items-center text-sm text-gray-600">
-          <Phone className="h-4 w-4 mr-2" />
-          <span>{doctor.phone}</span>
-        </div>
-        <div className="flex items-center text-sm text-gray-600">
-          <Mail className="h-4 w-4 mr-2" />
-          <span>{doctor.email}</span>
-        </div>
-        <p className="text-sm text-gray-600 pt-2">{doctor.description}</p>
+        <p className="text-sm text-gray-600 line-clamp-2">{doctor.description}</p>
         <div className="pt-2">
           <p className="text-lg font-semibold text-blue-600">
             {doctor.consultation_fee.toLocaleString('vi-VN')} VNĐ
           </p>
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex gap-2">
+        <Button 
+          variant="outline" 
+          className="flex-1" 
+          onClick={() => setDetailsOpen(true)}
+          data-testid="view-details-button"
+        >
+          Xem Chi Tiết
+        </Button>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button className="w-full" data-testid="book-appointment-button">Đặt Lịch Khám</Button>
