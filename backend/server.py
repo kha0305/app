@@ -420,6 +420,72 @@ async def delete_appointment(
     
     return {"message": "Appointment cancelled successfully"}
 
+# ============= ADMIN ROUTES =============
+async def get_current_admin(current_user: dict = Depends(get_current_user)) -> dict:
+    if current_user.get("role") != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authorized. Admin access required."
+        )
+    return current_user
+
+@api_router.get("/admin/stats", response_model=SystemStats)
+async def get_system_stats(current_user: dict = Depends(get_current_user)):
+    """Get system statistics - accessible by all authenticated users"""
+    total_users = await db.users.count_documents({})
+    total_patients = await db.users.count_documents({"role": "patient"})
+    total_doctors = await db.users.count_documents({"role": "doctor"})
+    total_appointments = await db.appointments.count_documents({})
+    pending = await db.appointments.count_documents({"status": "pending"})
+    confirmed = await db.appointments.count_documents({"status": "confirmed"})
+    completed = await db.appointments.count_documents({"status": "completed"})
+    cancelled = await db.appointments.count_documents({"status": "cancelled"})
+    
+    return SystemStats(
+        total_users=total_users,
+        total_patients=total_patients,
+        total_doctors=total_doctors,
+        total_appointments=total_appointments,
+        pending_appointments=pending,
+        confirmed_appointments=confirmed,
+        completed_appointments=completed,
+        cancelled_appointments=cancelled
+    )
+
+@api_router.get("/admin/users")
+async def get_all_users(current_user: dict = Depends(get_current_user)):
+    """Get all users - for admin dashboard"""
+    users = await db.users.find({}, {"_id": 0, "password_hash": 0}).to_list(1000)
+    users = [deserialize_datetime(user) for user in users]
+    return users
+
+@api_router.get("/admin/all-appointments")
+async def get_all_appointments(current_user: dict = Depends(get_current_user)):
+    """Get all appointments with details - for admin dashboard"""
+    appointments = await db.appointments.find({}, {"_id": 0}).sort("appointment_date", -1).to_list(1000)
+    
+    result = []
+    for apt in appointments:
+        patient = await db.users.find_one({"id": apt["patient_id"]}, {"_id": 0})
+        doctor = await db.users.find_one({"id": apt["doctor_id"]}, {"_id": 0})
+        doctor_profile = await db.doctor_profiles.find_one({"user_id": apt["doctor_id"]}, {"_id": 0})
+        
+        if patient and doctor and doctor_profile:
+            apt_with_details = AppointmentWithDetails(
+                **apt,
+                patient_name=patient["full_name"],
+                patient_code=patient.get("patient_code", "N/A"),
+                patient_phone=patient["phone"],
+                patient_email=patient["email"],
+                doctor_name=doctor["full_name"],
+                doctor_code=doctor.get("doctor_code", "N/A"),
+                doctor_specialty=doctor_profile["specialty"],
+                doctor_phone=doctor["phone"]
+            )
+            result.append(apt_with_details)
+    
+    return result
+
 # ============= ROOT ROUTE =============
 @api_router.get("/")
 async def root():
