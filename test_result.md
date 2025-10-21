@@ -106,52 +106,52 @@ user_problem_statement: "Bổ sung 4 tính năng mới: 1.Quên mật khẩu (gi
 
 backend:
   - task: "Forgot Password API - Reset password với email giả lập"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "backend/server.js, backend/models/PasswordResetToken.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Chuẩn bị triển khai API reset password"
+        comment: "Đã triển khai API: POST /api/auth/forgot-password, POST /api/auth/reset-password. Model PasswordResetToken đã tạo."
 
   - task: "Chat/Consultation API - WebSocket hoặc REST API cho chat"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "backend/server.js, backend/models/Consultation.js, backend/models/Message.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Chuẩn bị triển khai chat system"
+        comment: "Đã triển khai: POST /api/consultations, GET /api/consultations, GET /api/consultations/:id, POST /api/consultations/:id/messages, GET /api/consultations/:id/messages, PATCH /api/consultations/:id/end"
 
   - task: "Payment API - Demo thanh toán giả lập"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "backend/server.js, backend/models/Payment.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Chuẩn bị triển khai payment giả lập"
+        comment: "Đã triển khai: POST /api/payments/create, POST /api/payments/:id/confirm, GET /api/payments/appointment/:id, GET /api/payments/my-payments"
 
   - task: "Admin API - Quản lý users và thống kê"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "backend/server.js, backend/middleware/auth.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Chuẩn bị triển khai admin endpoints"
+        comment: "Đã triển khai: GET /api/admin/stats, GET /api/admin/users, GET /api/admin/users/:id, DELETE /api/admin/users/:id, GET /api/admin/appointments. Middleware requireAdmin đã có sẵn."
 
 frontend:
   - task: "Forgot Password Page - UI reset password"
