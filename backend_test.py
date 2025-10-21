@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import json
 
 class MedicalAppointmentAPITester:
-    def __init__(self, base_url="https://functional-site-3.preview.emergentagent.com"):
+    def __init__(self, base_url="https://ongoing-work-18.preview.emergentagent.com"):
         self.base_url = base_url
         self.patient_token = None
         self.doctor_token = None

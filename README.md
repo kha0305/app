@@ -39,8 +39,8 @@ sudo supervisorctl restart all
 sudo supervisorctl status
 ```
 
-- **Frontend**: https://functional-site-3.preview.emergentagent.com
-- **Backend API**: https://functional-site-3.preview.emergentagent.com/api
+- **Frontend**: https://ongoing-work-18.preview.emergentagent.com
+- **Backend API**: https://ongoing-work-18.preview.emergentagent.com/api
 
 ## 👤 Tài Khoản Demo
 
