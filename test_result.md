@@ -101,3 +101,123 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Bổ sung 4 tính năng mới: 1.Quên mật khẩu (giả lập email), 2.Chat tư vấn online, 3.Thanh toán (demo), 4.Admin Dashboard"
+
+backend:
+  - task: "Forgot Password API - Reset password với email giả lập"
+    implemented: false
+    working: "NA"
+    file: "backend/server.js, backend/models/PasswordResetToken.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Chuẩn bị triển khai API reset password"
+
+  - task: "Chat/Consultation API - WebSocket hoặc REST API cho chat"
+    implemented: false
+    working: "NA"
+    file: "backend/server.js, backend/models/Consultation.js, backend/models/Message.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Chuẩn bị triển khai chat system"
+
+  - task: "Payment API - Demo thanh toán giả lập"
+    implemented: false
+    working: "NA"
+    file: "backend/server.js, backend/models/Payment.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Chuẩn bị triển khai payment giả lập"
+
+  - task: "Admin API - Quản lý users và thống kê"
+    implemented: false
+    working: "NA"
+    file: "backend/server.js, backend/middleware/auth.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Chuẩn bị triển khai admin endpoints"
+
+frontend:
+  - task: "Forgot Password Page - UI reset password"
+    implemented: false
+    working: "NA"
+    file: "frontend/src/pages/ForgotPasswordPage.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Sẽ triển khai sau khi backend xong"
+
+  - task: "Chat Consultation Interface - UI chat"
+    implemented: false
+    working: "NA"
+    file: "frontend/src/pages/ChatConsultationPage.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Sẽ triển khai sau khi backend xong"
+
+  - task: "Payment Page - UI thanh toán"
+    implemented: false
+    working: "NA"
+    file: "frontend/src/pages/PaymentPage.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Sẽ triển khai sau khi backend xong"
+
+  - task: "Admin Dashboard - UI quản lý"
+    implemented: false
+    working: "NA"
+    file: "frontend/src/pages/AdminDashboard.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Sẽ triển khai sau khi backend xong"
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Forgot Password API"
+    - "Chat/Consultation API"
+    - "Payment API"
+    - "Admin API"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Bắt đầu triển khai 4 tính năng mới. Sẽ làm backend trước, test từng module, sau đó làm frontend."
