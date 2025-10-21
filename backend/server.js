@@ -16,7 +16,7 @@ const Message = require('./models/Message');
 const Payment = require('./models/Payment');
 
 // Import middleware
-const { authenticateToken, requireDoctor, requirePatient, SECRET_KEY } = require('./middleware/auth');
+const { authenticateToken, requireDoctor, requirePatient, requireAdmin, SECRET_KEY } = require('./middleware/auth');
 
 // Import helpers
 const { generatePatientCode, generateDoctorCode, generateUUID, specialties } = require('./utils/helpers');
