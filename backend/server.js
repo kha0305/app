@@ -10,6 +10,10 @@ const User = require('./models/User');
 const DoctorProfile = require('./models/DoctorProfile');
 const DoctorSchedule = require('./models/DoctorSchedule');
 const Appointment = require('./models/Appointment');
+const PasswordResetToken = require('./models/PasswordResetToken');
+const Consultation = require('./models/Consultation');
+const Message = require('./models/Message');
+const Payment = require('./models/Payment');
 
 // Import middleware
 const { authenticateToken, requireDoctor, requirePatient, SECRET_KEY } = require('./middleware/auth');
