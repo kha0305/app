@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đặt lịch khám hoặc tư vấn online</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        background: #f5f7fb;
+        color: #1f2933;
+      }
+
+      .container {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem 4rem;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+        margin-bottom: 0.5rem;
+        color: #0f172a;
+      }
+
+      p.subtitle {
+        margin-top: 0;
+        color: #4b5563;
+        font-size: 1rem;
+      }
+
+      form {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 1.8rem;
+        box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
+        margin-top: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1.2rem;
+      }
+
+      label {
+        font-weight: 600;
+        color: #1f2937;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 0.65rem 0.85rem;
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        font-size: 1rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+        outline: none;
+      }
+
+      button {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        border: none;
+        border-radius: 12px;
+        padding: 0.75rem 1.3rem;
+        color: white;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 15px 25px -12px rgba(37, 99, 235, 0.45);
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+
+      .status {
+        margin-top: 1rem;
+        font-weight: 600;
+      }
+
+      .history {
+        margin-top: 2.5rem;
+      }
+
+      .history h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+
+      .booking-card {
+        background: #ffffff;
+        padding: 1.2rem 1.4rem;
+        border-radius: 16px;
+        margin-bottom: 1rem;
+        box-shadow: 0 20px 40px -15px rgba(30, 41, 59, 0.18);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+      }
+
+      .booking-card h3 {
+        margin-top: 0;
+        margin-bottom: 0.35rem;
+        font-size: 1.1rem;
+      }
+
+      .booking-card small {
+        color: #6b7280;
+      }
+
+      .empty-state {
+        padding: 1.2rem 1.5rem;
+        border-radius: 16px;
+        background: rgba(59, 130, 246, 0.08);
+        color: #1d4ed8;
+        font-weight: 600;
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          padding: 1.8rem 1rem 3rem;
+        }
+
+        form {
+          padding: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Đặt lịch khám hoặc tư vấn online</h1>
+      <p class="subtitle">
+        Điền thông tin bên dưới để đặt lịch nhanh chóng. Bạn có thể lựa chọn giữa hình
+        thức khám trực tiếp tại cơ sở hoặc tư vấn trực tuyến.
+      </p>
+
+      <form id="booking-form">
+        <div class="form-group">
+          <label for="full_name">Họ và tên</label>
+          <input id="full_name" name="full_name" type="text" required placeholder="Nguyễn Văn A" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Số điện thoại</label>
+          <input id="phone" name="phone" type="tel" required placeholder="09xx xxx xxx" />
+        </div>
+
+        <div class="form-group">
+          <label for="booking_type">Loại dịch vụ</label>
+          <select id="booking_type" name="booking_type" required>
+            <option value="consultation">Tư vấn trực tuyến</option>
+            <option value="examination">Khám trực tiếp</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="preferred_date">Ngày mong muốn</label>
+          <input id="preferred_date" name="preferred_date" type="date" required />
+        </div>
+
+        <div class="form-group">
+          <label for="preferred_time">Giờ mong muốn</label>
+          <input id="preferred_time" name="preferred_time" type="time" required />
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Ghi chú (không bắt buộc)</label>
+          <textarea id="notes" name="notes" rows="3" placeholder="Ví dụ: có tiền sử bệnh nền..."></textarea>
+        </div>
+
+        <button type="submit">Đặt lịch ngay</button>
+        <div id="status" class="status" aria-live="polite"></div>
+      </form>
+
+      <section class="history" aria-live="polite">
+        <h2>Lịch sử đặt lịch</h2>
+        <div id="history-list" class="history-list"></div>
+      </section>
+    </div>
+
+    <script>
+      const detectApiBase = () => {
+        if (window.location.protocol === 'file:') {
+          return 'http://localhost:8001';
+        }
+
+        const { protocol, hostname } = window.location;
+        const port = 8001;
+        return `${protocol}//${hostname}:${port}`;
+      };
+
+      const API_BASE = detectApiBase();
+      const statusEl = document.getElementById('status');
+      const historyContainer = document.getElementById('history-list');
+      const form = document.getElementById('booking-form');
+
+      const renderHistory = (bookings) => {
+        if (!bookings.length) {
+          historyContainer.innerHTML = '<div class="empty-state">Chưa có lịch hẹn nào được tạo.</div>';
+          return;
+        }
+
+        historyContainer.innerHTML = bookings
+          .map((booking) => {
+            const createdAt = new Date(booking.created_at).toLocaleString('vi-VN');
+            const typeLabel =
+              booking.booking_type === 'consultation' ? 'Tư vấn trực tuyến' : 'Khám trực tiếp';
+
+            return `
+              <article class="booking-card">
+                <h3>${booking.full_name} · <small>${typeLabel}</small></h3>
+                <p><strong>Thời gian mong muốn:</strong> ${booking.preferred_date} lúc ${booking.preferred_time}</p>
+                <p><strong>Email:</strong> ${booking.email} · <strong>Điện thoại:</strong> ${booking.phone}</p>
+                ${booking.notes ? `<p><strong>Ghi chú:</strong> ${booking.notes}</p>` : ''}
+                <small>Đặt lúc ${createdAt}</small>
+              </article>
+            `;
+          })
+          .join('');
+      };
+
+      const loadHistory = async () => {
+        try {
+          const response = await fetch(`${API_BASE}/api/public/bookings`);
+          if (!response.ok) {
+            throw new Error('Không thể tải lịch sử.');
+          }
+
+          const bookings = await response.json();
+          renderHistory(bookings);
+        } catch (error) {
+          console.error(error);
+          historyContainer.innerHTML =
+            '<div class="empty-state">Không thể tải lịch sử. Vui lòng thử lại sau.</div>';
+        }
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        statusEl.textContent = '';
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+
+        try {
+          form.querySelector('button').disabled = true;
+          const response = await fetch(`${API_BASE}/api/public/bookings`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            const errorBody = await response.json().catch(() => ({}));
+            throw new Error(errorBody.detail || 'Đặt lịch thất bại.');
+          }
+
+          form.reset();
+          statusEl.style.color = '#15803d';
+          statusEl.textContent = 'Đặt lịch thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.';
+          await loadHistory();
+        } catch (error) {
+          statusEl.style.color = '#b91c1c';
+          statusEl.textContent = error.message || 'Đã xảy ra lỗi khi đặt lịch.';
+        } finally {
+          form.querySelector('button').disabled = false;
+        }
+      });
+
+      loadHistory();
+    </script>
+  </body>
+</html>

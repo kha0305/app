@@ -10,6 +10,7 @@ const User = require('./models/User');
 const DoctorProfile = require('./models/DoctorProfile');
 const DoctorSchedule = require('./models/DoctorSchedule');
 const Appointment = require('./models/Appointment');
+const PublicBooking = require('./models/PublicBooking');
 const PasswordResetToken = require('./models/PasswordResetToken');
 const Consultation = require('./models/Consultation');
 const Message = require('./models/Message');
@@ -41,6 +42,63 @@ mongoose.connect(`${MONGO_URL}/${DB_NAME}`, {
 })
 .then(() => console.log('✅ MongoDB connected successfully'))
 .catch(err => console.error('❌ MongoDB connection error:', err));
+
+// ============= PUBLIC BOOKING ROUTES =============
+app.post('/api/public/bookings', async (req, res) => {
+  try {
+    const { full_name, email, phone, booking_type, preferred_date, preferred_time, notes } = req.body;
+
+    if (!full_name || !email || !phone || !booking_type || !preferred_date || !preferred_time) {
+      return res.status(400).json({
+        detail: 'Missing required booking fields'
+      });
+    }
+
+    if (!['consultation', 'examination'].includes(booking_type)) {
+      return res.status(400).json({ detail: 'Invalid booking type' });
+    }
+
+    const booking = new PublicBooking({
+      id: generateUUID(),
+      full_name,
+      email,
+      phone,
+      booking_type,
+      preferred_date,
+      preferred_time,
+      notes: notes || ''
+    });
+
+    await booking.save();
+
+    const response = booking.toObject();
+    delete response._id;
+    delete response.__v;
+
+    res.status(201).json(response);
+  } catch (error) {
+    console.error('Create public booking error:', error);
+    res.status(500).json({ detail: 'Failed to create booking', error: error.message });
+  }
+});
+
+app.get('/api/public/bookings', async (req, res) => {
+  try {
+    const bookings = await PublicBooking.find({}).sort({ created_at: -1 });
+
+    const sanitized = bookings.map(booking => {
+      const data = booking.toObject();
+      delete data._id;
+      delete data.__v;
+      return data;
+    });
+
+    res.json(sanitized);
+  } catch (error) {
+    console.error('List public bookings error:', error);
+    res.status(500).json({ detail: 'Failed to load bookings', error: error.message });
+  }
+});
 
 // ============= AUTH ROUTES =============
 // Register
